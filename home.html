@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-App</title>
+    <style>
+        <style>
+
+            body{
+                background-color:#fff ;
+            }
+            #card{
+                box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+                background-color: rgb(9, 87, 97);
+                margin: 40px 70px;
+                border-radius: 10px;
+                padding-top: 10px;
+                padding-left: 20px;
+                text-align: center;
+                padding-bottom: 7px;
+            }
+    
+            #worklist{
+                background-color: white;
+                margin-right: 15px;
+                margin-left: -5px;
+                text-align: left;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                border-bottom-left-radius:7px ;
+                border-bottom-right-radius:7px ;
+    
+            }
+            h3{
+    
+                margin-left: 20px;
+                
+            }
+    
+            #worklist ul li{
+                background-color:rgb(7, 210, 139);
+                margin-left: -20px;
+                margin-top: 20px;
+                padding: 20px;
+                list-style: none;
+                margin-right: 10px;
+                margin-bottom: 5px;
+                display: flex;
+                justify-content: space-between;
+                border-radius: 5px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                
+    
+            }
+            .delete{
+                background-color: red;
+                padding: 3px 10px;
+                border-radius: 3px;
+                color: #fff;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                cursor: pointer;
+    
+            }
+            #worklist ul li:hover{
+                background-color:rgb(8, 126, 84);
+    
+            }
+    
+            #Add-Task{
+    
+                margin-top: 8px;
+                margin-bottom: 5px;
+            }
+            #task{
+                height: 30px;
+                width: 200px;
+                padding-left: 10px;
+                border-top-left-radius: 7px;
+                border-bottom-left-radius: 7px;
+                border: none;
+    
+    
+            }
+    
+            #submit{
+                height: 32px;
+                width: 70px;
+                color: rgb(252, 252, 252);
+                background-color: rgb(42, 252, 5);
+                border: none;
+                margin-left: -4px;
+                border-top-right-radius: 7px;
+                border-bottom-right-radius: 7px;
+            }
+        </style>
+    </style>
+</head>
+
+<body>
+    <div id="card">
+        <header>
+            <div id="pagebanner">
+                <img src="logo.png" alt="" height="120" width="170">
+            </div>
+        </header>
+
+        <div id="worklist">
+            <h3 class="title">Task List</h3>
+            <ul>
+                <li>
+                    <span class="name">Project </span>
+                    <span class="delete">Delete</span>
+                </li>
+                <li>
+                    <span class="name">Food </span>
+                    <span class="delete">Delete</span>
+                </li>
+                <li>
+                    <span class="name">Sleep </span>
+                    <span class="delete">Delete</span>
+                </li>
+                <li>
+                    <span class="name">Walk </span>
+                    <span class="delete">Delete</span>
+                </li>
+                <li>
+                    <span class="name">Eat </span>
+                    <span class="delete">Delete</span>
+                </li>
+            </ul>
+        </div>
+
+        <form id="add-work">
+            <input id="task" type="text" placeholder="Add New Task....">
+            <button id="submit" type="submit">ADD</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const list = document.querySelector('#worklist ul');
+            const addForm = document.querySelector('#add-work');
+
+            // delete task
+            list.addEventListener('click', (e) => {
+                if (e.target.className == 'delete') {
+                    const li = e.target.parentElement;
+                    li.parentNode.removeChild(li);
+                }
+            });
+
+            // add task
+            addForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const value = addForm.querySelector('input[type="text"]').value;
+                const li = document.createElement('li');
+                const workname = document.createElement('span');
+                const deletebtn = document.createElement('span');
+
+                workname.textContent = value;
+                deletebtn.textContent = 'Delete';
+
+                workname.classList.add('name');
+                deletebtn.classList.add('delete');
+
+                li.appendChild(workname);
+                li.appendChild(deletebtn);
+                list.appendChild(li);
+
+                // Clear input field after adding task
+                addForm.querySelector('input[type="text"]').value = "";
+            });
+        });
+    </script>
+</body>
+
+</html>
